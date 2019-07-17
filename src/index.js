@@ -3,6 +3,7 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 // Inicialización de la base de datos
 const app = express();
@@ -28,9 +29,15 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+app.use(flash());
 
 // Variables Globales
+app.use((req, res, next) =>{
+    res.locals.perfecto_msg = req.flash('perfecto_msg');
+    res.locals.error_msg = req.flash('error_msg');
 
+    next();//Permite que le servidor siga leyendo los comandos
+});
 
 // Rutas
 app.use(require('./routes/index'));
