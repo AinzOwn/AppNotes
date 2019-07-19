@@ -5,7 +5,8 @@ const {Schema} = mongoose;
 const EsquemaNota = new Schema ({
     titulo: { type: String, required: true },
     descripcion: { type: String, required: true },
-    fecha: { type: Date, default: Date.now }
+    fecha: { type: Date, default: Date.now },
+    usuario: { type: String }
 });
 
 module.exports = mongoose.model('Nota', EsquemaNota)
